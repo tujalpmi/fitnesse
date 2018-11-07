@@ -1,0 +1,36 @@
+---
+Test
+---
+!4 !style_caps{'''Test Suite/User GraphQL Tests/Create and Delete''''}
+----------------------
+!include -c .templatesTriggle.setup
+
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''TCGRAPH-USER-CREATE-001:  Create, verify and delete a User'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+
+''' TCGRAPH-USER-CREATE-001:  Create, verify and delete a User '''
+'' *  Create an user ''          
+'' *  Verify the user ''  
+'' *  Delete the user '' 
+
+!define HOST {http://srvaxitrgkub010}
+
+!define USER_PORT {30055}
+!define PROVIDER_PORT {30045}
+!define SYSTEM_PORT {30035}
+!define STOCK_PORT {30025}
+!define GRAPHQL_PORT {30065}
+
+!define USER_SERVICE {user}
+!define LOGIN_SERVICE {login}
+!define PROVIDER_SERVICE {company}
+!define REGION_SERVICE {region}
+!define RESORT_SERVICE {resort}
+
+!5 !style_page_title{!style_code(!style_black['''Create and verify an user'''])}
+!include -c .templatesTriggle.user.create-user-graphql
+
+
+!5 !style_page_title{!style_code(!style_black['''Delete the user'''])}
+!include -c .templatesTriggle.user.delete-user-graphql

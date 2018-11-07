@@ -1,0 +1,37 @@
+---
+Test
+---
+!4 !style_caps{'''Test Suite/Company Tests/Retrieve a Company'''}
+----------------------
+!include -c .templatesTriggle.setup
+
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''TC-COMPANY-RETRIEVE-001: Retrieve a company by id'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+
+''' TC-COMPANY-RETRIEVE-001:  Retrieve a company'''
+'' *  Create a new company''
+'' *  Retrieve this company by id ''
+'' *  Delete the company''
+
+!5 !style_page_title{!style_code(!style_black['''Get the first element of list of the companies and retrieve this company'''])}
+
+
+!5 !style_page_title{!style_code(!style_black['''Create and verify an user'''])}
+!include -c .templatesTriggle.user.create-admin-user
+
+!5 !style_page_title{!style_code(!style_black['''Create a company'''])}
+!include -c .templatesTriggle.company.create-company
+
+!5 !style_page_title{!style_code(!style_black['''List all companies'''])}
+!include -c .templatesTriggle.company.list-all-companies
+
+!5 !style_page_title{!style_code(!style_black['''Retrieve the company'''])}
+!include -c .templatesTriggle.company.retrieve-company
+
+!5 !style_page_title{!style_code(!style_black['''Delete the company'''])}
+!include -c .templatesTriggle.company.delete-company
+
+!5 !style_page_title{!style_code(!style_black['''Delete the user'''])}
+!include -c .templatesTriggle.user.delete-user
+

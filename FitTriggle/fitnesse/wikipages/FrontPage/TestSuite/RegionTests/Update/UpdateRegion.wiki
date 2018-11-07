@@ -1,0 +1,34 @@
+---
+Test
+---
+!4 !style_caps{'''Test Suite/Company Tests/Update a Region'''}
+----------------------
+!include -c .templatesTriggle.setup
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''Region Tests - Update a Region'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+
+''' TC-REG-UPDATE-001:  Update a region'''
+'' *  Create a region and check that the response is successful:true''
+'' *  Update a region and check that the response is successful:true''
+'' *  Delete a region and check that the response is successful:true ''             
+
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''TC-REG-UPDATE-001: Update a Region'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+
+!5 !style_page_title{!style_code(!style_black['''Create an admin user'''])}
+!include -c .templatesTriggle.user.create-admin-user
+
+!5 !style_page_title{!style_code(!style_black['''Create a region'''])}
+!include -c .templatesTriggle.region-resort.create-region
+
+!5 !style_page_title{!style_code(!style_black['''Update a region'''])}
+!include -c .templatesTriggle.region-resort.update-region
+
+!5 !style_page_title{!style_code(!style_black['''Delete the region'''])}
+!include -c .templatesTriggle.region-resort.delete-region
+
+
+!5 !style_page_title{!style_code(!style_black['''Delete the user'''])}
+!include -c .templatesTriggle.user.delete-user

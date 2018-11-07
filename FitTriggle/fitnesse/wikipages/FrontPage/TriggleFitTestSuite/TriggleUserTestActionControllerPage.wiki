@@ -1,0 +1,36 @@
+---
+Test
+---
+!path /home/triggle/fitnesse-1.0-SNAPSHOT.jar
+
+
+
+Change the password for an existing user
+!|Action fixture|
+|start|com.triggle.fitnesse.ActionController|
+|enter|set userId|48316|
+|press|check User Id|
+|check|get username|INT_arkadiusz.cazarnota|
+|enter|set username|ADMIN|
+|enter|set password|1234|
+|press|login|
+|enter|change password|1234|
+|press|login|
+|check|logindata|successful|
+
+Create a new user, update him and then delete
+!|Action fixture|
+|start|com.triggle.fitnesse.ActionController|
+|enter|set username|MaxMuster|
+|enter|set password|1234|
+|enter|set name|Max|
+|enter|set surname|Pattern|
+|enter|set email|kristian.dunker@axisdata.net|
+|enter|set phone|1234|
+|press|createUser|
+|check|get userId|>0|
+|press|verifyToken|
+|press|updateUser|
+|check|get status|200|
+|press|deleteUser|
+|check|get status|200|

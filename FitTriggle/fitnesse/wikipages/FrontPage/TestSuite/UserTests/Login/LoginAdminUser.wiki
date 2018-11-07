@@ -1,0 +1,18 @@
+---
+Test
+---
+!4 !style_caps{'''Test Suite/User Tests/Login/Login of an admin user'''}
+----------------------
+!include -c .templatesTriggle.setup
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''TC-USER-LOGIN-001:  Login an admin user'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+''' TC-USER-LOGIN-001:  Login an User '''
+'' *  Login an admin user '' 
+!5 !style_page_title{!style_code(!style_black['''Create and verify an user'''])}
+!include -c .templatesTriggle.user.create-admin-user
+!5 !style_page_title{!style_code(!style_black['''Login an user'''])}
+!include -c .templatesTriggle.user.login-user
+!5 !style_page_title{!style_code(!style_black['''Delete an user'''])}
+!include -c .templatesTriggle.user.delete-user
+

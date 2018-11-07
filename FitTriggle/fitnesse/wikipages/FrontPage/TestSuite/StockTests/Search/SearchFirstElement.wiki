@@ -1,0 +1,9 @@
+---
+Test
+---
+!4 !style_caps{'''Test Suite/Stocks Tests/Search stocks'''}
+----------------------
+!include -c .templatesTriggle.setup
+
+!5 !style_page_title{!style_code(!style_black['''Seach first stock of the stock list'''])}
+!include -c .templatesTriggle.stock.search-first-stock

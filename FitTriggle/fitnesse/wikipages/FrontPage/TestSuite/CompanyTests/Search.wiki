@@ -1,0 +1,10 @@
+---
+Suite
+---
+!4 !style_caps{'''Test Suite/Company Tests/Search'''}
+-----------------------------
+
+
+1. - [[Search the fist elemenet][>SearchFirstCompany]]
+2. - [[Search a new company][>SearchNewCompany]]
+3. - [[Search by an unauthorized user][>SearchByUnauthorizedUser]]

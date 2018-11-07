@@ -1,0 +1,12 @@
+---
+Suite
+---
+!4 !style_caps{'''Test Suite/Company Tests/Update'''}
+-----------------------------
+
+
+1. - [[Update a Company][>UpdateCompany]]
+2. - [[Update Non Existing Company][>UpdateNonExistingCompany]]
+3. - [[Update with existing regitrationTaxNumber][>UpdateWithExistingRegitrationTaxNumber]]
+
+

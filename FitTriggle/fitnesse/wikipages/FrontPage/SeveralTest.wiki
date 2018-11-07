@@ -1,0 +1,196 @@
+!define TEST_SYSTEM {slim}
+| import |
+| fit |
+| fitnesse.slim.test |
+| fitnesse.fixtures |
+| com.triggle.fitnesse |
+
+!path /home/triggle/fitnesse-1.0-SNAPSHOT.jar
+
+List User
+
+!5 !style_page_title{!style_code(!style_black['''Create browser user - complete fields'''])}
+!| rest controller |
+| request | host| port|check response? |
+| {"username": "michael.teising@axisdata.net","password": "kiss" , "url": "http://axisdata.net" , "termsAccepted": "true","email": "michael.teising@axisdata.net"}|http://srvaxitrgkub010|30020||
+
+
+!5 !style_page_title{!style_code(!style_black['''Create browser user - complete fields'''])}
+!| rest controller |
+| request | host| port|service| http method |check response? |
+| {"username": "michael.teising@axisdata.net","email": "michael.teising@axisdata.net"}|http://srvaxitrgkub010|30020|/user|post|{"successful":false,"errorCode":"GC-300","errorMessage":"Constraint violations","errorSystemMessage":"Constraint violations","constraintMessges":[{"constraintErrorCode":"CN-100","systemConstraintMessage":"createUser.arg0.url: URL is missing","constraintMessage":"createUser.arg0.url is missing"},{"constraintErrorCode":"CN-100","systemConstraintMessage":"createUser.arg0.password: Password is missing","constraintMessage":"createUser.arg0.password is missing"},{"constraintErrorCode":"CN-100","systemConstraintMessage":"createUser.arg0.termsAccepted: TermsAccepted must be not null","constraintMessage":"createUser.arg0.termsAccepted is missing"}]}|
+
+
+
+
+!5 !style_page_title{!style_code(!style_black['''Create browser user - complete fields'''])}
+!| rest controller |
+| request | host| port|service| http method |check response? |json path?|
+| {"username": "fitnesse.test","password": "fitnesse.test" ,"genderCode": "MALE",  "phone": "0034657654609","birthDate": "2018-09-18T04:40:10.559Z", "url": "http://axisdata.net" , "termsAccepted": "true","email": "fitnesse.test@axisdata.net"}|http://srvaxitrgkub010|30020|/user|post|||
+
+
+!5 !style_page_title{!style_code(!style_black['''Create browser user - complete fields'''])}
+!| rest controller |
+| request | host| port|service| http method |check response? |
+| {"username": "fitnesse.test","password": "fitnesse.test" ,"genderCode": "MALE", "url": "http://axisdata.net" , "termsAccepted": "true","email": "fitnesse.test@axisdata.net"}|http://srvaxitrgkub010|30020|/user|post|{"successful":false,"errorCode":"AU-102","errorMessage":"Username pending verification","errorSystemMessage":"User with username fitnesse.test has pending mail verifications"}|
+
+
+
+
+
+
+
+!5 !style_page_title{!style_code(!style_black['''Create browser user - complete fields'''])}
+!| rest controller |
+| request | host| port|send request? |get message?|
+| {"username": "michael.teising@axisdata.net","password": "kiss" , "url": "http://axisdata.net" , "termsAccepted": "true","email": "michael.teising@axisdata.net"}|http://srvaxitrgkub010|30020||User created. Pending to validate.|
+
+
+
+
+
+!define TEST_SYSTEM {slim}
+| import |
+| fit |
+| fitnesse.slim.test |
+| fitnesse.fixtures |
+| com.triggle.fitnesse |
+
+!path /home/triggle/fitnesse-1.0-SNAPSHOT.jar
+
+List User
+
+#| rest controller |
+#| username | password | page | list user? |
+#| ADMIN | 1234 | 1 | >0 |
+
+| rest controller |
+| username | password | page | list user? |
+| fitnesse.admin| 1234 | 1 | >0 |
+
+
+
+Checking User Service
+
+#| rest controller |
+#| user id | username | password | check user id? |
+#| 50156 | ADMIN | 1234 | ADMIN |
+
+| rest controller |
+| user id | username | password | check user id? |
+| 50156 | fitnesse.admin | 1234 | ADMIN |
+
+
+Login with wrong password
+
+
+| rest controller |
+| username | password | login? |
+| ADMIN1 | 1234 | 401 |
+| ADMIN | 4321 | 401 |
+
+
+Login with correct password. Email addresses have to be in quotes, otherwise Fitnesse is using this as an email address and is sending a <a> element instead.
+
+#| rest controller |
+#| username | password | login? |
+#| ADMIN | 1234 | true |
+#| patternuser | 1234 | true |
+#| 'kristian.dunker@axisdata.net' | 1234 | true |
+
+| rest controller |
+| username | password | login? |
+| fitnesse.admin| 1234 | true |
+| patternuser | 1234 | true |
+| 'kristian.dunker@axisdata.net' | 1234 | true |
+
+
+!5 !style_page_title{!style_code(!style_black['''Create browser user - missing fields'''])}
+!| rest controller |
+| username | email | create user? |get message?|
+| josealvarez | temp00 |0|- Error : GC-300:Constraint violations - Constrains: CN-100 createUser.arg0.url is missing CN-100 createUser.arg0.password is missing CN-100 createUser.arg0.termsAccepted is missing|
+
+
+!5 !style_page_title{!style_code(!style_black['''Create browser user  with a duplicated email'''])}
+!| rest controller |
+| name| surname|username |password|url| Terms Accepted|email | create user? |get message?|
+| fitnesseduplicateemail |frameworkduplicatedemail|fittest| fittestduplicated|http://axisdata.net|true| jalvgonsar@hotmail.com|0|- Error : AU-101:User with email jalvgonsar@hotmail.com already exists|
+
+
+!5 !style_page_title{!style_code(!style_black['''Create browser user - complete fields'''])}
+!| rest controller |
+| name| surname|username |password|url| Terms Accepted|email | create user? |get message?|
+| fitnessetest |frameworktest|fittest| fittest001|http://axisdata.net|true| jose.alvarez@axisdata.net|$A=|User created. Pending to validate.|
+
+!5 !style_page_title{!style_code(!style_black['''Create the same browser user  before to validate: display AU-102:Username pending verification'''])}
+!| rest controller |
+| name| surname|username |password|url| Terms Accepted|email | create user? |get message?|
+| fitnessetest |frameworktest|fittest| fittest001|http://axisdata.net|true| jose.alvarez@axisdata.net|0|- Error : AU-102:User with username fittest has pending mail verifications|
+
+
+!5 !style_page_title{!style_code(!style_black['''Verify the user with an invalid token'''])}
+!| rest controller |
+| verification token| verify tokens? |get message?|
+|47b31777-d8a6-000000-bbca-f1f8cb9b8820|NOK|- Error : AU-106:Invalid link token|
+
+!5 !style_page_title{!style_code(!style_black['''Verify the user with a valid token'''])}
+| rest controller|
+|environment|query|number fields| fields| sql expression result?  |
+|DVLP-TRIGGLE|SELECT * from AU_USER_VERIFICATION where AU_USERID='$A'|1|TOKEN |$B=|
+
+!| rest controller |
+| verification token| verify tokens? |get message?|
+|$B|OK|null|
+
+!5 !style_page_title{!style_code(!style_black['''Verify token again'''])}
+!| rest controller |
+| verification token| verify tokens? |get message?|
+|$B|NOK|- Error : AU-105:Link token expired|
+
+!5 !style_page_title{!style_code(!style_black['''Create the same browser user  after to verify: display AU-100:Username already exist'''])}
+!| rest controller |
+| name| surname|username |password|url| Terms Accepted|email | create user? |get message?|
+| fitnessetest |frameworktest|fittest| fittest001|http://axisdata.net|true| jose.alvarez@axisdata.net|0|- Error : AU-100:User with username fittest already exists|
+
+!5 !style_page_title{!style_code(!style_black['''Delete user - with userid'''])}
+!| rest controller |
+| user id| token|delete users? |get message?|
+|$A|eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBRE1JTiIsImp0aSI6IjUwMTU2IiwiZXhwIjoxNTYzODcxOTcwfQ.FzI9zBWRCl5xI2gOw4Bl5vilZGbSIqo2BTjUhLdpMPA|OK|User with id $A has been deleted|
+
+
+!5 !style_page_title{!style_code(!style_black['''Delete user - with invalid userid'''])}
+!| rest controller |
+| user id| token|delete users? |get message?|
+|12332232|eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBRE1JTiIsImp0aSI6IjUwMTU2IiwiZXhwIjoxNTYzODcxOTcwfQ.FzI9zBWRCl5xI2gOw4Bl5vilZGbSIqo2BTjUhLdpMPA|NOK|- Error : GC-100:User with id 12332232 not found|
+
+
+!5 !style_page_title{!style_code(!style_black['''Get user by id in order to get token (admin login needed)'''])}
+!| rest controller |
+| username | password |user id| login? | check user id?| get message?|
+| fitnesse.admin | 1234 |51076|true|jose.alvarez|{"id":50906,"name":"Jose","surname":"Alvarez","username":"jose.alvarez","email":"jalvgonsar@hotmail.com","phone":"0034635493804","isoLanguage":{"languageCode":"EN","name":"English","active":true},"authorization":{"applicationName":"Triggle","roleName":"USER","modules":[{"name":"UA002","description":"Account Settings"}]},"authentication":{},"verifications":[{"verificationType":{"code":"VERIFYEMAIL","languages":[{"languageCode":"EN","codename":"VERIFYEMAIL","description":"User email verification."}]},"token":"0d2bb6e6-841f-480a-a479-cd487393b95e","expirationDate":"2018-09-13 13:19:36","confirmationDate":"2018-09-12 13:20:05"}],"contacts":[],"birthDate":"2018-09-12","genderCode":"MALE"}|
+
+
+!5 !style_page_title{!style_code(!style_black['''Get user by invalid id in order to get token (admin login needed): - Error : GC-100:No found user for id 505849999'''])}
+| rest controller |
+| username | password |user id| login? | check user id?| get message?|
+| fitnesse.admin | 1234 |505849999|true|Error|- Error : GC-100:No found user for id 505849999|
+
+
+!5 !style_page_title{!style_code(!style_black['''Login - incomplete credentials: there is not password'''])}
+!| rest controller |
+| username  | login? |get message?|
+| fitnesse.admin  |401|null|
+
+!5 !style_page_title{!style_code(!style_black['''Login - invalid credentials'''])}
+!| rest controller |
+| username  |password | login? |get message?|
+| fitnesse.admin |12345555|401|null|
+
+
+
+
+
+
+
+
+

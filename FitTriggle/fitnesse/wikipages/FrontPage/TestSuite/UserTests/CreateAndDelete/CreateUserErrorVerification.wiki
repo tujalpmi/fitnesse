@@ -1,0 +1,34 @@
+---
+Test
+---
+!4 !style_caps{'''Test Suite/User Tests/ Error Messages'''}
+----------------------
+!include -c .templatesTriggle.setup
+!include -c .templatesTriggle.set-end-point
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''TC-USER-ERROR-002 - Create browser user - verification error messages'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!5 !style_page_title{!style_code(!style_black['''Create an user'''])}
+!include -c .templatesTriggle.user.create-user
+!5 !style_page_title{!style_code(!style_black['''Create the same browser user  before to validate: display AU-102:Username pending verification'''])}
+!| rest controller |
+|test case| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|TC-USER-ERROR-002| {"username": "fitnesse.triggle","password": "fitnesse.triggle" ,"genderCode": "MALE",  "phone": "0034657654609","birthDate": "2018-09-18T04:40:10.559Z", "url": "http://axisdata.net" , "termsAccepted": "true","email": "fitnesse.test@axisdata.net"}||${HOST}|${USER_PORT}|/user|post|{"successful":false,"errorCode":"AU-102","errorMessage":"Username pending verification","errorSystemMessage":"User with username fitnesse.triggle has pending mail verifications"}|200|$.successful|false|
+||||||||-|0|$.errorCode|AU-102|
+||||||||-|0|$.errorMessage|Username pending verification|
+!5 !style_page_title{!style_code(!style_black['''Verify the user with a valid token'''])}
+!include -c .templatesTriggle.user.verify-user
+!5 !style_page_title{!style_code(!style_black['''Verify the user with an invalid token'''])}
+!| rest controller |
+|test case| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|TC-USER-ERROR-002||iJ9.eyJzdWIi0000XRuZXNzZS5hZG1pbiIsImp0aSI6IjUxMDg2IiwiZXhwIjoxNTM3Mjc5N|${HOST}|${USER_PORT}|/user/verify|get|{"successful":false,"errorCode":"AU-106","errorMessage":"Invalid link token","errorSystemMessage":"Invalid link token"}|200|$.successful|false|
+||||||||-|0|$.errorCode|AU-106|
+||||||||-|0|$.errorMessage|Invalid link token|
+!5 !style_page_title{!style_code(!style_black['''Verify token again'''])}
+!| rest controller |
+|test case| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|TC-USER-ERROR-002||$TOKEN|${HOST}|${USER_PORT}|/user/verify|get|{"successful":false,"errorCode":"AU-105","errorMessage":"Token link expired","errorSystemMessage":"Link token expired"}|200|$.successful|false|
+||||||||-|0|$.errorCode|AU-105|
+||||||||-|0|$.errorMessage|Token link expired|
+!5 !style_page_title{!style_code(!style_black['''Delete the user'''])}
+!include -c .templatesTriggle.user.delete-user

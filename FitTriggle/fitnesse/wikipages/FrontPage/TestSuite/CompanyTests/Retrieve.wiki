@@ -1,0 +1,4 @@
+!4 !style_caps{'''Test Suite/Company Tests/Retrieve'''}
+-----------------------------
+
+1. - [[Retrieve a company by id][>RetrieveCompanyById]]

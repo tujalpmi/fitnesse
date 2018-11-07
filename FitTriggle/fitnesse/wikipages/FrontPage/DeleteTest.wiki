@@ -1,0 +1,21 @@
+!define TEST_SYSTEM {slim}
+| import |
+| fit |
+| fitnesse.slim.test |
+| fitnesse.fixtures |
+| com.triggle.fitnesse |
+
+!path /home/triggle/fitnesse-1.0-SNAPSHOT.jar
+
+List User
+
+!5 !style_page_title{!style_code(!style_black['''Delete user - with invalid userid'''])}
+!| rest controller |
+| user id| token|delete users? |get message?|
+|51084|f394a522-ff6c-4a86-86d8-05a3d9759422|NOK|- Error : GC-100:User with id 12332232 not found|
+
+
+!5 !style_page_title{!style_code(!style_black['''Get user by id in order to get token (admin login needed)'''])}
+!| rest controller |
+| username | password |login?|user id|token| delete user?|
+| fitnesse.admin | 1234 || 51384|f394a522-ff6c-4a86-86d8-05a3d9759422||

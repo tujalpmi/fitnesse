@@ -1,0 +1,11 @@
+---
+Suite
+---
+!4 !style_caps{'''Test GraphQL Suite/User GraphQL Tests/Login'''}
+--------------------------------------
+
+1. - [[Login a user][>UserLogin]]
+2. - [[Get current user][>GetCurrentUser]]
+3. - [[Login with a wrong usename][>LoginWrongUsename]]
+
+ 

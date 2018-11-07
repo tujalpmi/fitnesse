@@ -1,0 +1,35 @@
+---
+Static
+---
+!4 !style_caps{'''Test Suite/User Tests/Create and Delete Users'''}
+----------------------
+!include -c .templatesTriggle.setup
+
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''User Tests - Create and Delete'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+
+''' TC-USER-CREATE-001:  Create and verify an user '''
+'' *  Create an user ''          
+'' *  Verify the user ''  
+
+''' TC-USER-DELETE-001: Delete an User '''  
+'' *  Delete the user ''
+
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''TC-USER-CREATE-001:  Create and verify an User'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+
+!5 !style_page_title{!style_code(!style_black['''Create and verify an user'''])}
+!include -c .templatesTriggle.user.create-user
+!5 !style_page_title{!style_code(!style_black['''Verify an user'''])}
+!include -c .templatesTriggle.user.verify-user
+
+
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''TC-USER-DELETE-001: Delete an User'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+
+
+!5 !style_page_title{!style_code(!style_black['''Delete an user'''])}
+!include -c .templatesTriggle.user.delete-user

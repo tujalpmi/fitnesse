@@ -1,0 +1,11 @@
+---
+Suite
+---
+!4 !style_caps{'''Test Suite/Company Tests'''}
+-----------------------------
+
+1. - [[Create and Delete][>CreateAndDelete]]
+2. - [[Update][>Update]]
+3. - [[Delete in a  Company][>DeleteInACompany]]
+4. - [[Search][>Search]]
+5. - [[Retrieve][>Retrieve]]

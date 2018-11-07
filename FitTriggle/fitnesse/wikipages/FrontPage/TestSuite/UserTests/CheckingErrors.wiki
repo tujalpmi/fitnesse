@@ -1,0 +1,125 @@
+---
+Static
+---
+!4 !style_caps{'''Test Suite/User Tests/ Error Messages'''}
+----------------------
+!include -c .templatesTriggle.setup
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''User Tests - Error Messages'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+
+
+''' TC: TC-USER-ERROR-001 - Create browser user - missing fields '''
+''' TC: TC-USER-ERROR-002 - Create browser user - verification error messages '''
+''' TC: TC-USER-ERROR-003 - Create browser user  with a duplicated email '''
+''' TC: TC-USER-ERROR-004 - Login - invalid credentials '''
+
+
+
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''TC-USER-ERROR-001 - Create browser user - missing fields'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+
+
+!5 !style_page_title{!style_code(!style_black['''Create browser user - missing fields'''])}
+
+!| rest controller |
+|test case| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|TC-USER-ERROR-001| {"username": "fitnesse.test","email": "fitnesse.test@axisdata.net"}||${HOST}|${PORT}|/user|post||200|$.successful|false|
+||||||||-|0|$.errorCode|GC-300|
+||||||||-|0|$.errorMessage|Constraint violations|
+
+
+
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''TC-USER-ERROR-002 - Create browser user - verification error messages'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+
+
+
+!5 !style_page_title{!style_code(!style_black['''Create browser user - complete fields'''])}
+!| rest controller |
+|test case| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|TC-USER-ERROR-002| {"username": "fitnesse.test","password": "fitnesse.test" ,"genderCode": "MALE",  "phone": "0034657654609","birthDate": "2018-09-18T04:40:10.559Z", "url": "http://axisdata.net" , "termsAccepted": "true","email": "fitnesse.test@axisdata.net"}||${HOST}|${PORT}|/user|post||200|$.data.id|$USER=|
+#|||||||-|0|$.username|fitnesse.test|
+#|||||||-|0|$.email|fitnesse.test@axisdata.net|
+#|||||||-|0|$.phone|0034657654609|
+
+
+!5 !style_page_title{!style_code(!style_black['''Create the same browser user  before to validate: display AU-102:Username pending verification'''])}
+!| rest controller |
+|test case| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|TC-USER-ERROR-002| {"username": "fitnesse.test","password": "fitnesse.test" ,"genderCode": "MALE",  "phone": "0034657654609","birthDate": "2018-09-18T04:40:10.559Z", "url": "http://axisdata.net" , "termsAccepted": "true","email": "fitnesse.test@axisdata.net"}||${HOST}|${PORT}|/user|post|{"successful":false,"errorCode":"AU-102","errorMessage":"Username pending verification","errorSystemMessage":"User with username fitnesse.test has pending mail verifications"}|200|$.successful|false|
+||||||||-|0|$.errorCode|AU-102|
+||||||||-|0|$.errorMessage|Username pending verification|
+
+
+
+!5 !style_page_title{!style_code(!style_black['''Verify the user with a valid token'''])}
+| sql expressions|
+|environment|query|number fields| fields| sql expression result?  |
+|DVLP-TRIGGLE|SELECT * from AU_USER_VERIFICATION where AU_USERID='$USER'|1|TOKEN |$TOKEN=|
+
+!| rest controller |
+|test case| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|TC-USER-ERROR-002||$TOKEN|${HOST}|${PORT}|/user/verify|get|{"successful":true}|200|$.successful|true|
+
+
+
+!5 !style_page_title{!style_code(!style_black['''Verify the user with an invalid token'''])}
+
+!| rest controller |
+|test case| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|TC-USER-ERROR-002||iJ9.eyJzdWIi0000XRuZXNzZS5hZG1pbiIsImp0aSI6IjUxMDg2IiwiZXhwIjoxNTM3Mjc5N|${HOST}|${PORT}|/user/verify|get|{"successful":false,"errorCode":"AU-106","errorMessage":"Invalid link token","errorSystemMessage":"Invalid link token"}|200|$.successful|false|
+||||||||-|0|$.errorCode|AU-106|
+||||||||-|0|$.errorMessage|Invalid link token|
+
+
+
+!5 !style_page_title{!style_code(!style_black['''Verify token again'''])}
+!| rest controller |
+|test case| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|TC-USER-ERROR-002||$TOKEN|${HOST}|${PORT}|/user/verify|get|{"successful":false,"errorCode":"AU-105","errorMessage":"Token link expired","errorSystemMessage":"Link token expired"}|200|$.successful|false|
+||||||||-|0|$.errorCode|AU-105|
+||||||||-|0|$.errorMessage|Token link expired|
+
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''TC-USER-ERROR-003 - Create browser user  with a duplicated email'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+
+
+
+!5 !style_page_title{!style_code(!style_black['''Create browser user  with a duplicated email'''])}
+!| rest controller |
+|test case| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|TC-USER-ERROR-003| {"username": "fitnesse.test2","password": "fitnesse.test2" ,"genderCode": "MALE",  "phone": "0034657654609","birthDate": "2018-09-18T04:40:10.559Z", "url": "http://axisdata.net" , "termsAccepted": "true","email": "fitnesse.test@axisdata.net"}||${HOST}|${PORT}|/user|post|{"successful":false,"errorCode":"AU-101","errorMessage":"User email already exists","errorSystemMessage":"User with email fitnesse.test@axisdata.net already exists"}|200|$.successful|false|
+||||||||-|0|$.errorCode|AU-101|
+||||||||-|0|$.errorMessage|User email already exists|
+
+
+!5 !style_page_title{!style_code(!style_black['''Delete user - with userid'''])}
+
+!| rest controller |
+|test case| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|TC-USER-ERROR-003|{"username": "fitnesse.admin","password": "1234"}||${HOST}|${PORT}|/login|post||200|$.token||
+|TC-USER-ERROR-003||$USER|${HOST}|${PORT}|/user/|delete|{"successful":true}|200|$.successful|true|
+#|||||||-|0|$.errorSystemMessage|User with id $USER has been deleted|
+
+
+#!5 !style_page_title{!style_code(!style_black['''Login - incomplete credentials: there is not password'''])}
+#!| rest controller |
+#| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+#|{"username": "fitnesse.admin"}||${HOST}|${PORT}|/login|post||200|$.successful|false|
+
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''TC-USER-ERROR-004 - Login - invalid credentials'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+
+
+!5 !style_page_title{!style_code(!style_black['''Login - invalid credentials'''])}
+!| rest controller |
+|test case| body |parameters| host| port|service| http method |check response? |get status? |
+|TC-USER-ERROR-004|{"username": "fitnesse.admin","password": "1234777"}||${HOST}|${PORT}|/login|post|{"code":401,"message":"Invalid credentials"}|401|
+
+
+

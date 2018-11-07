@@ -1,0 +1,17 @@
+!4 !style_caps{'''Test Suite'''}
+-----------------------------
+
+!4 !style_caps{'''REST Tests'''}
+-------------------------------
+[[User Tests][>UserTests]]
+[[Stock Tests][>StockTests]]
+[[Company Tests][>CompanyTests]]
+[[Region Tests][>RegionTests]]
+[[Resort Tests][>ResortTests]]
+
+!4 !style_caps{'''GraphQL Tests'''}
+------------------------------------
+[[User GraphQL Tests][>UserGraphQLTests]]
+[[Stock GraphQL Tests][>StockGraphQLTests]]
+[[Company GraphQL Tests][>CompanyGraphQLTests]]
+

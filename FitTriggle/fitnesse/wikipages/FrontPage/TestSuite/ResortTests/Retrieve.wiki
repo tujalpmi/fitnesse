@@ -1,0 +1,4 @@
+!4 !style_caps{'''Test Suite/Resort Tests/Retrieve a resort'''}
+-----------------------------
+
+1. - [[Retrieve a resort][>RetrieveResort]]

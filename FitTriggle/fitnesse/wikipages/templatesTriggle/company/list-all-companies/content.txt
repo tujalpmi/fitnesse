@@ -1,0 +1,15 @@
+!include -c .templatesTriggle.set-end-point
+
+
+!define HTTPMETHOD {post}
+
+
+!5 !style_page_title{!style_code(!style_black['''List all companies'''])}
+
+
+!| rest controller |
+|test case| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|TC-COMPANY-SEARCH-001|{ "minutes": 9,"username": "${USERNAME}","password": "${PASSWORD}"}||${HOST}|${USER_PORT}|/${LOGIN_SERVICE}|post||200|$.data.token||
+||{ "orderBy": [ "code"]}|?pageSize=6&numberPage=1|${HOST}|${PROVIDER_PORT}|/${PROVIDER_SERVICE}/list|post||200|$.data[?(@.id ==$COMPID)].displayName|$COMPDIS=|
+||||||||||$.data[?(@.id ==$COMPID)].legalName|$COMPLEG=|
+||||||||||$.data[?(@.id ==$COMPID)].registrationTaxNumber|$COMPREG=|

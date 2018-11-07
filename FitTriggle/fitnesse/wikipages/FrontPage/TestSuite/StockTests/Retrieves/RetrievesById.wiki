@@ -1,0 +1,19 @@
+---
+Test
+---
+!4 !style_caps{'''Test Suite/Stocks Tests/Retireve stocks'''}
+----------------------
+!include -c .templatesTriggle.setup
+           
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''TC-STOCK-RETRIEVE-002:  Retrieve stock by Stock Id '''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+
+''' TC-STOCK-RETRIEVE-002:  Retrieve stock by Stock Id '''
+'' *  Search the first element of the Stock List ''
+'' *  Retrieve the stock by stock Id  ''  
+!5 !style_page_title{!style_code(!style_black['''Search the first stock'''])}
+!include -c .templatesTriggle.stock.search-first-stock
+!5 !style_page_title{!style_code(!style_black['''Get stock by Stock Id'''])}
+!include -c .templatesTriggle.stock.retrieve-stock-id
+

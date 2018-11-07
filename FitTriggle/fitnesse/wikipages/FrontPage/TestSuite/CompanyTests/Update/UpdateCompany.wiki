@@ -1,0 +1,29 @@
+---
+Test
+---
+!4 !style_caps{'''Test Suite/Company Tests/Update/Update a Company'''}
+----------------------
+!include -c .templatesTriggle.setup
+
+
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''TC3: Update contacts, address  and communications to a company'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+
+''' TC3: Update contacts adress and communications to a company '''
+'' *  Create a company ''
+'' *  Update contacts, address  and communications to a company to the company ''
+'' *  Delete the company ''
+!5 !style_page_title{!style_code(!style_black['''Create an user'''])}
+!include -c .templatesTriggle.user.create-user
+!5 !style_page_title{!style_code(!style_black['''Verify this user'''])}
+!include -c .templatesTriggle.user.verify-user
+!5 !style_page_title{!style_code(!style_black['''The user creates a company'''])}
+!include -c .templatesTriggle.company.create-company
+!5 !style_page_title{!style_code(!style_black['''Update the company'''])}
+!include -c .templatesTriggle.company.update-company
+!5 !style_page_title{!style_code(!style_black['''Delete the company'''])}
+!include -c .templatesTriggle.company.delete-company
+!5 !style_page_title{!style_code(!style_black['''Delete the user'''])}
+!include -c .templatesTriggle.user.delete-user
+

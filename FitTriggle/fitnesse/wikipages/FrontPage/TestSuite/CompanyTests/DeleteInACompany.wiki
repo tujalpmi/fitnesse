@@ -1,0 +1,9 @@
+---
+Suite
+---
+!4 !style_caps{'''Test Suite/Company Tests/Delete in a Company'''}
+-----------------------------
+
+1. - [[Delete contacts][>DeleteContacts]]
+2. - [[Delete address][>DeleteAddress]]
+3. - [[Delete communications][>DeleteCommunications]]

@@ -1,0 +1,8 @@
+---
+Suite
+Test: no
+---
+[[Test Case1 Domain 1][>TestCase1Domain1]]
+[[Test Case2 Domain 1][>TestCase2Domain1]]
+[[Test Case3 Domain 1][>TestCase3Domain1]]
+

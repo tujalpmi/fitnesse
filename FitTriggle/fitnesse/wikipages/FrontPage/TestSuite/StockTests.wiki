@@ -1,0 +1,13 @@
+---
+Suite
+---
+!4 !style_caps{'''Test Suite/Stock Tests'''}
+----------------------
+#4. - [[Search Stocks][>SearchStocks]]
+#5. - [[Retrieves in a stock][>RetrievesAStock]]
+1. - [[Create and Delete][>CreateAndDelete]]
+2. - [[Update][>Update]]
+3. - [[Delete in a Stock][>DeleteInAStock]]
+4. - [[Search][>Search]]
+5. - [[Retrieves][>Retrieves]]
+

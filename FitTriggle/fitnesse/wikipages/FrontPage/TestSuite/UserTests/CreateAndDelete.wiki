@@ -1,0 +1,10 @@
+---
+Suite
+---
+!4 !style_caps{'''Test Suite/User Tests/Create and Delete Users'''}
+----------------------
+
+1. - [[Create and Delete][>CreateDeleteUser]]
+2. - [[Create User Missing Fields][>CreateUserMissingFields]]
+3. - [[Create User Error Verification][>CreateUserErrorVerification]]
+4. - [[Create User Duplicated Email][>CreateUserDuplicatedEmail]]

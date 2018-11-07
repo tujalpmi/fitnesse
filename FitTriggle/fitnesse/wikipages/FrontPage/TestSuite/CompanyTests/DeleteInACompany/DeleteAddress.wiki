@@ -1,0 +1,53 @@
+---
+Test
+---
+!4 !style_caps{'''Test Suite/Company Tests/Delete in a Company'''}
+----------------------
+!include -c .templatesTriggle.setup
+
+''' TC-COMP-DELETE-002: Delete the address in a company'''
+'' *  Create a company with address ''
+'' *  Delete the address of the company and check that really is deleted''
+'' *  Delete the company''
+
+
+
+!5 !style_page_title{!style_code(!style_black['''Create an user'''])}
+!include -c .templatesTriggle.user.create-user
+
+!5 !style_page_title{!style_code(!style_black['''Verify this user'''])}
+!include -c .templatesTriggle.user.verify-user
+
+
+
+!4 !style_caps{!style_code(!style_blue[''' ======================================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''TC-COMP-DELETE-002: Delete the address in a company'''])}
+!4 !style_caps{!style_code(!style_blue[''' ======================================================================================================================================='''])}
+
+
+!5 !style_page_title{!style_code(!style_black['''Create a company'''])}
+!include -c .templatesTriggle.company.create-company
+
+!5 !style_page_title{!style_code(!style_black['''Update the company'''])}
+!include -c .templatesTriggle.company.update-company
+
+!5 !style_page_title{!style_code(!style_black['''Search the company'''])}
+!include -c .templatesTriggle.company.search-in-company
+
+!5 !style_page_title{!style_code(!style_black['''Delete the address of the company'''])}
+!include -c .templatesTriggle.company.delete-address-company
+
+!5 !style_page_title{!style_code(!style_black['''Check that the address really is deleted'''])}
+!| rest controller |
+|test case| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|TC-COMP-DELETE-002|{"username": "ADMIN","password": "1234"}||${HOST}|${USER_PORT}|/${LOGIN_SERVICE}|post||200|$.data.token||
+|||$COMPID|${HOST}|${PROVIDER_PORT}|/${PROVIDER_SERVICE}/|get||200|$.data.addresses[0].id|no result|
+
+
+!5 !style_page_title{!style_code(!style_black['''Delete the company'''])}
+!include -c .templatesTriggle.company.delete-company
+
+
+!5 !style_page_title{!style_code(!style_black['''Delete the user'''])}
+!include -c .templatesTriggle.user.delete-user
+

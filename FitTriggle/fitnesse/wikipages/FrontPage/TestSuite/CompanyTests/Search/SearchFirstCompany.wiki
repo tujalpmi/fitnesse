@@ -1,0 +1,19 @@
+---
+Test
+---
+!4 !style_caps{'''Test Suite/Company Tests/Search Companies'''}
+
+!include -c .templatesTriggle.setup
+
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''TC-COMPANY-SEARCH-002:  Search the first company of list by a admin user'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+
+!5 !style_page_title{!style_code(!style_black['''Create an admin user'''])}
+!include -c .templatesTriggle.user.create-admin-user
+
+!5 !style_page_title{!style_code(!style_black['''Search companies'''])}
+!include -c .templatesTriggle.company.list-company
+
+!5 !style_page_title{!style_code(!style_black['''Delete the user'''])}
+!include -c .templatesTriggle.user.delete-user

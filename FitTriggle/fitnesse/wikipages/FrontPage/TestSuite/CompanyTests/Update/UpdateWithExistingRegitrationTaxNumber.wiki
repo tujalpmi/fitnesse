@@ -1,0 +1,65 @@
+---
+Test
+---
+!4 !style_caps{'''Test Suite/Company Tests/Update/Update an existing regitrationTaxNumber to a company'''}
+----------------------
+!include -c .templatesTriggle.setup
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''Company Tests - Checking errores'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+
+
+''' TC5: Update an existing regitrationTaxNumber to a company: check the errorSystemMessage = Already exists a company with regitrationTaxNumber XXX'''
+'' *  Create a company with regitrationTaxNumber XXX''
+'' *  Create a company with a regitrationTaxNumber YYY ''
+'' *  Update the regitrationTaxNumber to XXX to YYY check the errorSystemMessage = Already exists a company with regitrationTaxNumber YYY ''
+'' *  Delete the two companies'' 
+
+!4 !style_caps{!style_code(!style_blue[''' ======================================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''TC5: Update an existing regitrationTaxNumber to a company: check the error = Already exists a company with regitrationTaxNumber FIT41'''])}
+!4 !style_caps{!style_code(!style_blue[''' ======================================================================================================================================='''])}
+
+!5 !style_page_title{!style_code(!style_black['''Create a company 1 with taxId:FIT'''])}
+!5 !style_page_title{!style_code(!style_black['''Create a company 2 with taxId:FIT41'''])}
+
+!5 !style_page_title{!style_code(!style_black['''Create an user'''])}
+!include -c .templatesTriggle.user.create-admin-user
+
+!| rest controller |
+| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|{ "minutes": 9,"username": "${USERNAME}","password": "${PASSWORD}"}||${HOST}|${USER_PORT}|/${LOGIN_SERVICE}|post||200|$.data.token||
+|    { "displayName":"FitNesse Company",   "legalName":"A new legal FitNesse Company",   "registrationTaxNumber":"FIT"    }  ||${HOST}|${PROVIDER_PORT}|/${PROVIDER_SERVICE}|post||200|$.data.id|$COMP=|
+| { "displayName": "FitNesse Company 41","legalName": "A new legal FitNesse Company 41", "registrationTaxNumber": "FIT41"}||${HOST}|30045|/company|post||200|$.data.id|$COMP2=|
+
+!| rest controller |
+| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|{ "minutes": 9,"username": "${USERNAME}","password": "${PASSWORD}"}||${HOST}|${USER_PORT}|/${LOGIN_SERVICE}|post||200|$.data.token||
+|{ "id" : $COMP, "displayName": "FitNesse Company 2", "contacts": [  { "name": "Selenium", "contactTypeCode" : "MANAGAMENT", "surname" : "Framework","communications": [ {  "communicationTypeId": 1, "value": "600391496",    "active": true,   "primary": true     }    ]     } ], "companyTypeCode": "GE", "legalName": "A new legal FitNesse Company 2", "termsAndConditions": "FitNesse terms", "currencyCode" : "EUR", "languageCode" : "ES", "registrationTaxNumber": "FIT2"} |$COMP|${HOST}|${PROVIDER_PORT}|/${PROVIDER_SERVICE}/|post||200|$.data.id||
+
+
+!5 !style_page_title{!style_code(!style_black['''Update the taxId to FIT41 for the company 1: check the error'''])}
+
+!| rest controller |
+| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|{ "minutes": 9,"username": "${USERNAME}","password": "${PASSWORD}"}||${HOST}|${USER_PORT}|/${LOGIN_SERVICE}|post||200|$.data.token||
+|{ "id" : $COMP, "displayName": "FitNesse Company 2", "contacts": [  { "name": "Selenium", "contactTypeCode" : "MANAGAMENT", "surname" : "Framework","communications": [ {  "communicationTypeId": 1, "value": "600391496",    "active": true,   "primary": true     }    ]     } ], "legalName": "A new legal FitNesse Company 2", "termsAndConditions": "FitNesse terms", "currencyCode" : "EUR", "languageCode" :"ES", "registrationTaxNumber": "FIT41"} |$COMP|${HOST}|${PROVIDER_PORT}|/${PROVIDER_SERVICE}/|post||200|$.successful|false|
+|||||||||$.errorCode|CO-103|
+|||||||||$.errorSystemMessage|Company with registration tax number FIT41 already exists|
+
+
+!5 !style_page_title{!style_code(!style_black['''Delete the company 1'''])}
+!| rest controller |
+| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|{ "minutes": 9,"username": "${USERNAME}","password": "${PASSWORD}"}||${HOST}|${USER_PORT}|/${LOGIN_SERVICE}|post||200|$.data.token||
+||$COMP|${HOST}|${PROVIDER_PORT}|/${PROVIDER_SERVICE}/|delete||200|$.successful|true|
+
+
+!5 !style_page_title{!style_code(!style_black['''Delete the company 2'''])}
+!| rest controller |
+| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|{ "minutes": 9,"username": "${USERNAME}","password": "${PASSWORD}"}||${HOST}|${USER_PORT}|/${LOGIN_SERVICE}|post||200|$.data.token||
+||$COMP2|${HOST}|${PROVIDER_PORT}|/${PROVIDER_SERVICE}/|delete||200|$.successful|true|
+
+
+!5 !style_page_title{!style_code(!style_black['''Delete an user'''])}
+!include -c .templatesTriggle.user.delete-user

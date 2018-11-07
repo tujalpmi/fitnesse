@@ -1,0 +1,19 @@
+---
+Test
+---
+!4 !style_caps{'''Test Suite/User Tests/Login/Login of a simple user'''}
+----------------------
+!include -c .templatesTriggle.setup
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''TC-USER-LOGIN-002:  Login of a simple user'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+''' TC-USER-LOGIN-002:  Login an User '''
+'' *  Login a simple user '' 
+!5 !style_page_title{!style_code(!style_black['''Create an user with the rol of user'''])}
+!include -c .templatesTriggle.user.create-user
+!5 !style_page_title{!style_code(!style_black['''Verify the user'''])}
+!include -c .templatesTriggle.user.verify-user
+!5 !style_page_title{!style_code(!style_black['''Login'''])}
+!include -c .templatesTriggle.user.login-user
+!5 !style_page_title{!style_code(!style_black['''Delete an user'''])}
+!include -c .templatesTriggle.user.delete-user

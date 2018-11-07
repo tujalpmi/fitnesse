@@ -1,0 +1,4 @@
+!4 !style_caps{'''Test Suite/Stock Tests/Retrieve'''}
+----------------------
+1. - [[Retrieves by Id][>RetrievesById]]
+2. - [[Retrieves by Code][>RetrievesByCode]]

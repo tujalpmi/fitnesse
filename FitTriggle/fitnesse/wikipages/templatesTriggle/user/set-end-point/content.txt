@@ -1,0 +1,3 @@
+!define HOST {http://srvaxitrgkub010}
+!define PORT {30055}
+!define SERVICE {user}

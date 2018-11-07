@@ -1,0 +1,36 @@
+!define TEST_SYSTEM {slim}
+
+| import |
+| fit |
+| fitnesse.slim.test |
+| fitnesse.fixtures |
+| com.triggle.fitnesse |
+| com.triggle.utils |
+
+#!path /home/triggle/fitnesse-1.0-SNAPSHOT.jar
+!path /axisdata/fitnesse/fitnesse-1.0-SNAPSHOT.jar
+
+!include -c .templatesTriggle.set-end-point
+
+!define HTTPMETHOD {delete}
+!define SERVICE {delete}
+!define USERNAME {ADMIN}
+!define PASSWORD {1234}
+
+| sql expressions|
+|environment|query|number fields| fields| sql expression result?  |
+|DVLP-TRIGGLE|SELECT * from AU_USER where USERNAME='fitnesse.triggle'|1|AU_USERID |$USERID=|
+
+| sql expressions|
+|environment|query|number fields| fields| sql expression result?  |
+|DVLP-TRIGGLE|SELECT * from OD_COMPANY where REGISTRATION_TAX_NUMBER='FIT'|1|OD_COMPANYID|$COMPID=|
+
+!| rest controller |
+| body |parameters| host| port|service| http method |check response? |get status? |
+|{ "minutes": 9,"username": "${USERNAME}","password": "${PASSWORD}"}||${HOST}|${USER_PORT}|/${LOGIN_SERVICE}|post||200|
+||$COMPID|${HOST}|${PROVIDER_PORT}|/${PROVIDER_SERVICE}/|${HTTPMETHOD}|||
+
+!| rest controller |
+|test case| body |parameters| host| port|service| http method |check response? |get status? |
+|TC-USER-LOGIN-001|{"username": "${USERNAME}","password": "${PASSWORD}"}||${HOST}|${USER_PORT}|/${LOGIN_SERVICE}|post||200|
+|TC-USER-DELETE-001||$USERID|${HOST}|${USER_PORT}|/${USER_SERVICE}/|${HTTPMETHOD}|||

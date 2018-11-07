@@ -1,0 +1,22 @@
+---
+Test
+---
+!define TEST_SYSTEM {slim}
+
+| import |
+| fit |
+| fitnesse.slim.test |
+| fitnesse.fixtures |
+| com.triggle.fitnesse |
+
+
+!path /home/triggle/fitnesse-1.0-SNAPSHOT.jar
+!contents -R2 -g -p -f -h
+
+| rest controller |
+| page | get stock summary? |
+| 1 | >0 |
+
+| rest controller |
+| stockId | get stock ? |
+| 459642 | Cesar Manrique Route DO NOT USE |

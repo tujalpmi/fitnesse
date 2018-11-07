@@ -1,0 +1,35 @@
+---
+Test
+---
+!4 !style_caps{'''Test Suite/Company Tests/CreateAndDeleResort'''}
+----------------------
+!include -c .templatesTriggle.setup
+
+''' TC-REG-CREATE-001:  Create a Resort by admin/auth user '''
+'' *  Create a Region''
+'' *  Create a Resort for this Region''
+'' *  Delete the Region and the Resort ''             
+
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''TC-REG-CREATE-001: Create a Resort'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+
+!5 !style_page_title{!style_code(!style_black['''Create an admin user'''])}
+!include -c .templatesTriggle.user.create-admin-user
+
+!5 !style_page_title{!style_code(!style_black['''Create a region'''])}
+!include -c .templatesTriggle.region-resort.create-region
+
+!5 !style_page_title{!style_code(!style_black['''Create a Resort'''])}
+!include -c .templatesTriggle.region-resort.create-resort
+
+!5 !style_page_title{!style_code(!style_black['''Delete the Resort'''])}
+!include -c .templatesTriggle.region-resort.delete-resort
+
+!5 !style_page_title{!style_code(!style_black['''Delete the region'''])}
+!include -c .templatesTriggle.region-resort.delete-region
+
+!5 !style_page_title{!style_code(!style_black['''Delete the user'''])}
+!include -c .templatesTriggle.user.delete-user
+
+

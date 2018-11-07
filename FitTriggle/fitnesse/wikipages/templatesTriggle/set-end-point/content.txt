@@ -1,0 +1,13 @@
+!define HOST {http://srvaxitrgkub010}
+
+!define USER_PORT {30055}
+!define PROVIDER_PORT {30045}
+!define SYSTEM_PORT {30035}
+!define STOCK_PORT {30025}
+!define GRAPHQL_PORT {30065}
+
+!define USER_SERVICE {user}
+!define LOGIN_SERVICE {login}
+!define PROVIDER_SERVICE {company}
+!define REGION_SERVICE {region}
+!define RESORT_SERVICE {resort}

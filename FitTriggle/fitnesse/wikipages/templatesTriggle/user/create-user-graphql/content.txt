@@ -1,0 +1,21 @@
+!include -c .templatesTriggle.set-end-point
+
+
+INPUT:
+
+!define USERNAME {fitnesse.triggle}
+!define PASSWORD {fitnesse.triggle}
+!define EMAIL {fitnesse.triggle@axisdata.net}
+
+OUTPUT:
+
+- USERID
+
+
+!| graph ql controller |
+| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|{ "query":"mutation ($userRequest: UserRequestInput!) { createUser(userRequest: $userRequest) { username password id}  }", "variables":{ "userRequest":{  "username":"${USERNAME}","password":"${PASSWORD}", "genderCode": "MALE", "phone": "0034657654609","birthDate": "2018-09-18", "url": "http://axisdata.net" , "termsAccepted": "true","email": "${EMAIL}"}}}||${HOST}|${GRAPHQL_PORT}|/graphql|post||200|$.data.createUser.id|$USERID=|
+
+
+
+

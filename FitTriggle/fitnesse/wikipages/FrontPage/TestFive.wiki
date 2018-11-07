@@ -1,0 +1,28 @@
+!4 !style_caps{'''Test Suite/Company Tests/CreateAndDeleCompany'''}
+----------------------
+!include -c .templatesTriggle.setup
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''Company Tests - Create and Delete a Company'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+
+''' TC-COMP-CREATE-001:  Create a company '''
+'' *  Create and verify a new user triggle.fitnesse''
+'' *  This user triggle.fitnesse creates a new company''
+'' *  Delete the company ''
+'' *  Delete the user ''             
+
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''TC-COMP-CREATE-001: Create/Delete a company'''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+
+
+
+!include -c .templatesTriggle.company.set-end-point
+
+
+!include -c .templatesTriggle.set-end-point
+
+
+| sql expressions|
+|environment|query| sql expression result?  |
+|DVLP-TRIGGLE|UPDATE AU_AUTHORIZATION SET AU_ROLEID=5710 where au_userid = 53578||

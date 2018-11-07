@@ -1,0 +1,10 @@
+---
+Suite
+---
+!4 !style_caps{'''Test GraphQL Suite/User GraphQL Tests/Create and Delete'''}
+--------------------------------------
+
+1. - [[Create and delete an user][>CreateDeleteUser]]
+2. - [[Create duplicated user][>CreateDuplicatedUser]]
+3. - [[Delete non existing user][>DeleteNonExistingUser]]
+

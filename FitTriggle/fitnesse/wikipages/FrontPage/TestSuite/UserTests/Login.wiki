@@ -1,0 +1,9 @@
+---
+Suite
+---
+!4 !style_caps{'''Test Suite/User Tests/Login'''}
+-----------------------------
+
+1. - [[Login admin user][>LoginAdminUser]]
+2. - [[Login simple user][>LoginSimpleUser]]
+3. - [[Login Invalid Credentials][>LoginInvalidCredentials]]

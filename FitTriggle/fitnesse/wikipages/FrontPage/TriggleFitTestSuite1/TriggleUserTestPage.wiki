@@ -1,0 +1,41 @@
+---
+Test
+---
+!define TEST_SYSTEM {slim}
+
+| import |
+| fit |
+| fitnesse.slim.test |
+| fitnesse.fixtures |
+| com.triggle.fitnesse |
+
+
+!path /home/triggle/fitnesse-1.0-SNAPSHOT.jar
+!contents -R2 -g -p -f -h
+
+
+Checking User Service
+| rest controller |
+| user id | check user id? |
+| 48316 | INT_arkadiusz.cazarnota |
+
+Login with wrong password
+| rest controller |
+| username | password | login? |
+| ADMIN1 | 1234 | 401 |
+| ADMIN | 4321 | 401 |
+
+
+Login with correct password
+| rest controller |
+| username | password | login? |
+| ADMIN | 1234 | true |
+| patternuser | 1234 | true |
+
+
+
+
+
+
+
+

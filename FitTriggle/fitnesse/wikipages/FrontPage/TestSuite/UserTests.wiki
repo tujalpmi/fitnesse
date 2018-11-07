@@ -1,0 +1,17 @@
+---
+Suite
+---
+!4 !style_caps{'''Test Suite/User Tests'''}
+-----------------------------
+
+
+1. - [[Login][>Login]]
+2. - [[Create and Delete][>CreateAndDelete]]
+3. - [[Change Password][>ChangePassword]]
+4. - [[Update][>Updater]]
+5. - [[Delete in an User][>DeleteInAUser]]
+6. - [[Search in a User][>SearchInAUser]]
+7. - [[Retrieves][>Retrieves]]
+
+
+

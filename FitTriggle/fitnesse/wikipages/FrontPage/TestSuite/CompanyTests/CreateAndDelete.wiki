@@ -1,0 +1,7 @@
+---
+Suite
+---
+!4 !style_caps{'''Test Suite/Company Tests/Create and Delete'''}
+-----------------------------
+1. - [[Create and Delete Basic Company][>CreateAndDeleteCompany]]
+1. - [[Create aduplicate company][>CreateDuplicateCompany]]

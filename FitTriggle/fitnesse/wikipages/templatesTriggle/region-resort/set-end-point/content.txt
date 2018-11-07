@@ -1,0 +1,4 @@
+!define HOST {http://srvaxitrgkub010}
+!define PORT {30050}
+!define SERVICEREGION {region}
+!define SERVICERESORT {resort}

@@ -1,0 +1,6 @@
+!4 !style_caps{'''Test Suite/Resort Tests/Update a resort'''}
+-----------------------------
+
+
+1. - [[Update a resort][>UpdateResort]]
+

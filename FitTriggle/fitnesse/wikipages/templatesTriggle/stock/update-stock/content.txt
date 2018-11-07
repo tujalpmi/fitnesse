@@ -1,0 +1,22 @@
+!include -c .templatesTriggle.region-resort.set-end-point
+
+
+
+!define HTTPMETHOD {post}
+!define REGIONCODE {FIT}
+!define REGIONNAME {Selenium Beach}
+
+
+INPUT:
+
+- REGIONCODE
+- REGIONNAME
+
+
+!5 !style_page_title{!style_code(!style_black['''Update a Resort'''])}
+
+
+!| rest controller |
+|test case| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|TC-USER-LOGIN-001|{ "minutes": 9,"username": "${USERNAME}","password": "${PASSWORD}"}||${HOST}|30020|/login|post||200|$.data.token||
+|TC-REG-UPDATE-001|	{"regionCode": "${REGIONCODE}","name": "${REGIONNAME}","code": "FITCO","tourismDestinationCode": "XXX","transferTourismDestinationCode": "ACE"}|$RESORTID|${HOST}|${PORT}|/${SERVICERESORT}/|${HTTPMETHOD}|{"successful":true}|200|$.successful|true|

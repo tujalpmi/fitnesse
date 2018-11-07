@@ -1,0 +1,25 @@
+---
+Test
+---
+!4 !style_caps{'''Test Suite/Company Tests/Search Companies'''}
+
+!include -c .templatesTriggle.setup
+
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+!4 !style_page_title{!style_code(!style_blue['''TC-COMPANY-SEARCH-002:  Search the first company of list by an unauthorized user '''])}
+!4 !style_caps{!style_code(!style_blue[''' ===================================================================================================================='''])}
+
+!5 !style_page_title{!style_code(!style_black['''Create a user'''])}
+!include -c .templatesTriggle.user.create-user
+
+!5 !style_page_title{!style_code(!style_black['''Verify this user'''])}
+!include -c .templatesTriggle.user.verify-user
+
+!5 !style_page_title{!style_code(!style_black['''List companies'''])}
+!| rest controller |
+|test case| body |parameters| host| port|service| http method |check response? |get status? |path expression|json path?|
+|TC-COMPANY-SEARCH-001|{ "minutes": 9,"username": "${USERNAME}","password": "${PASSWORD}"}||${HOST}|${USER_PORT}|/${LOGIN_SERVICE}|post||200|$.data.token||
+||{ "orderBy": [ "code"]}|?pageSize=6&numberPage=1|${HOST}|${PROVIDER_PORT}|/${PROVIDER_SERVICE}/list[0]|post||403|$.message|User not authorized.|
+
+!5 !style_page_title{!style_code(!style_black['''Delete the user'''])}
+!include -c .templatesTriggle.user.delete-user
